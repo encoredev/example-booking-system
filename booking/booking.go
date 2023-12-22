@@ -35,7 +35,7 @@ type BookParams struct {
 	Email string    `encore:"sensitive"`
 }
 
-//encore:api public method=POST path=/book
+//encore:api public method=POST path=/booking
 func Book(ctx context.Context, p *BookParams) error {
 	eb := errs.B()
 
@@ -96,4 +96,27 @@ func listBookingsBetween(ctx context.Context, start, end time.Time) ([]*Booking,
 		})
 	}
 	return bookings, nil
+}
+
+type ListBookingsResponse struct {
+	Booking []*Booking `json:"bookings"`
+}
+
+//encore:api auth method=GET path=/booking
+func ListBookings(ctx context.Context) (*ListBookingsResponse, error) {
+	rows, err := query.ListBookings(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	var bookings []*Booking
+	for _, row := range rows {
+		bookings = append(bookings, &Booking{
+			ID:    row.ID,
+			Start: row.StartTime.Time,
+			End:   row.EndTime.Time,
+			Email: row.Email,
+		})
+	}
+	return &ListBookingsResponse{Booking: bookings}, nil
 }

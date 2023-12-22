@@ -61,6 +61,36 @@ func (q *Queries) InsertBooking(ctx context.Context, arg InsertBookingParams) (B
 	return i, err
 }
 
+const listBookings = `-- name: ListBookings :many
+SELECT id, start_time, end_time, email, created_at FROM booking
+`
+
+func (q *Queries) ListBookings(ctx context.Context) ([]Booking, error) {
+	rows, err := q.db.Query(ctx, listBookings)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Booking
+	for rows.Next() {
+		var i Booking
+		if err := rows.Scan(
+			&i.ID,
+			&i.StartTime,
+			&i.EndTime,
+			&i.Email,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listBookingsBetween = `-- name: ListBookingsBetween :many
 SELECT id, start_time, end_time, email, created_at FROM booking
 WHERE start_time >= $1 AND end_time <= $2

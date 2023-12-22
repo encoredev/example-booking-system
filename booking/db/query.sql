@@ -16,3 +16,6 @@ RETURNING *;
 -- name: ListBookingsBetween :many
 SELECT * FROM booking
 WHERE start_time >= $1 AND end_time <= $2;
+
+-- name: ListBookings :many
+SELECT * FROM booking;
