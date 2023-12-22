@@ -69,11 +69,10 @@ func bookableSlotsForDay(date time.Time, avail *Availability) ([]BookableSlot, e
 	availEnd := date.Add(time.Duration(availEndTime.Microseconds) * time.Microsecond)
 
 	// Compute the bookable slots in this day, based on availability.
-	const duration = 2 * time.Hour
 	var slots []BookableSlot
 	start := availStart
 	for {
-		end := start.Add(duration)
+		end := start.Add(DefaultBookingDuration)
 		if end.After(availEnd) {
 			break
 		}
