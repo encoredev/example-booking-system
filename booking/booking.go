@@ -12,7 +12,7 @@ import (
 	"encore.dev/storage/sqldb"
 )
 
-const DefaultBookingDuration = 2 * time.Hour
+const DefaultBookingDuration = 1 * time.Hour
 
 var (
 	bookingDB = sqldb.NewDatabase("booking", sqldb.DatabaseConfig{

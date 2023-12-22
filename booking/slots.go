@@ -33,11 +33,12 @@ func GetBookableSlots(ctx context.Context, from string) (*SlotsResponse, error) 
 
 	var slots []BookableSlot
 	for i := 0; i < numDays; i++ {
-		weekday := (int(fromDate.Weekday()) + i) % 7
+		date := fromDate.AddDate(0, 0, i)
+		weekday := int(date.Weekday())
 		if len(availability) <= weekday {
 			break
 		}
-		daySlots, err := bookableSlotsForDay(fromDate, &availability[weekday])
+		daySlots, err := bookableSlotsForDay(date, &availability[weekday])
 		if err != nil {
 			return nil, err
 		}
