@@ -80,8 +80,8 @@ func Book(ctx context.Context, p *BookParams) error {
 	startTime := pgtype.Timestamp{Time: p.Start, Valid: true}
 	_, err = sendgrid.Send(ctx, &sendgrid.SendParams{
 		From: sendgrid.Address{
-			Name:  "Booking System",
-			Email: "booking-example@email.com",
+			Name:  "Simon Johansson",
+			Email: "simon@encore.dev",
 		},
 		To: sendgrid.Address{
 			Email: p.Email,
