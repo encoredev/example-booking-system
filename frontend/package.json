@@ -7,8 +7,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
-    "gen": "encore gen client {{ENCORE_APP_ID}} --output=./src/lib/client.ts --env=staging",
-    "gen:local": "encore gen client {{ENCORE_APP_ID}} --output=./src/lib/client.ts --env=local"
+    "gen": "encore gen client booking-system-teti --output=./src/lib/client.ts --env=staging",
+    "gen:local": "encore gen client booking-system-teti --output=./src/lib/client.ts --env=local"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.2",
