@@ -7,8 +7,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "jest",
-    "gen": "encore gen client booking-system-teti --output=./src/lib/client.ts --env=staging",
-    "gen:local": "encore gen client booking-system-teti --output=./src/lib/client.ts --env=local"
+    "gen": "encore gen client {{ENCORE_APP_ID}} --output=./src/lib/client.ts --env=staging",
+    "gen:local": "encore gen client {{ENCORE_APP_ID}} --output=./src/lib/client.ts --env=local"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.2",
@@ -17,6 +17,7 @@
     "@tanstack/react-query": "^5.0.0",
     "cross-fetch": "^3.1.5",
     "date-fns": "^2.30.0",
+    "date-fns-tz": "^2.0.0",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

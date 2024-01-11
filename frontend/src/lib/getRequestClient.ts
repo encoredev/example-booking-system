@@ -8,7 +8,8 @@ import Client, { Environment, Local } from "./client";
  */
 const getRequestClient = () => {
   const token = Cookies.get("auth-token");
-  const env = window.location.host.includes("localhost")
+
+  const env = ["localhost", "127.0.0.1"].includes(window.location.hostname)
     ? Local
     : Environment("staging");
 
